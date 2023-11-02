@@ -133,8 +133,7 @@ int main()
     {
         for (int col = 0; col < 8; col++)
         {
-            cout << (chessboard[row][col].squareColor == WHITE ? "W" : "B");
-            cout << " - ";
+            
             if (chessboard[row][col].piece.pieceColor == WHITE)
             {
                 switch (chessboard[row][col].piece.pieceName)
@@ -158,7 +157,7 @@ int main()
                     cout << "P";
                     break;
                 case NONE:
-                    cout << " ";
+                    cout << "X";
                     break;
                 }
             }
@@ -187,12 +186,12 @@ int main()
                     break;
 
                 case NONE:
-                    cout << " ";
+                    cout << "X";
                     break;
                 }
             }
 
-            cout << " | ";
+            cout << "  ";
         }
         cout << endl;
     }
