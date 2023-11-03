@@ -1,8 +1,35 @@
 #include <iostream>
 
 using namespace std;
+//Define enum with 64 squares
+//Fix Numbers
+//Enums -> File Rank
+//Functions -> get Rank and File by square
+
+//constexpr bitboard kRank1{0b11111111};
+//typedef uint64_t bitboard;
+
+//constexpr bitboard kFileA{0x101010101010101ULL};
+//constexpr bitboard kAllSquares = ~0ULL;
+
+//constexpr bitboard kLightSquares
+//constexpr bitboard kCenter
+
+//whiteRooks   = 0b10000001;
+
+//Define Kingside QueenSide and WhiteSide and BlackSide
+
+//64 bits booleans 
+//White Pawns
+
+//Bit Board  - 64 bit
+
+
 
 #define BOARD_SIZE 64
+#define END_OF_WHITE_PIECE_SQUARES 15
+#define RANK_SIZE 8
+#define START_OF_BLACK_PIECE_SQUARES 48
 // Colors for Squares and Pieces
 enum Color
 {
@@ -47,13 +74,13 @@ int main()
     {
 
         chessboard[i].squareColor = (i) % 2 == 1 ? WHITE : BLACK;
-        if (i < 16)
+        if (i <= END_OF_WHITE_PIECE_SQUARES)
         {
             chessboard[i].piece.pieceColor = WHITE;
             // Set white pieces in the first two rows
-            if (i < 8)
+            if (i < RANK_SIZE)
             {
-                switch (i % 8)
+                switch (i % RANK_SIZE)
                 {
                 case 0:
                 case 7:
@@ -84,13 +111,13 @@ int main()
             }
         }
         // Set black pieces in the last two rows
-        else if (i >= 48)
+        else if (i >= START_OF_BLACK_PIECE_SQUARES)
         {
             chessboard[i].piece.pieceColor = BLACK;
             // Set Main pieces to last row
-            if (i >= 56)
+            if (i >= START_OF_BLACK_PIECE_SQUARES+RANK_SIZE)
             {
-                switch (i % 8)
+                switch (i % RANK_SIZE)
                 {
                 case 0:
                 case 7:
@@ -129,7 +156,7 @@ int main()
 
     // print the chess board
 
-    for (int i = 63; i > -1; i--)
+    for (int i = BOARD_SIZE-1; i > -1; i--)
     {
 
         if (chessboard[i].piece.pieceColor == WHITE)
