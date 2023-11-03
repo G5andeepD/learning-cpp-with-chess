@@ -88,9 +88,9 @@ int main()
         {
             chessboard[i].piece.pieceColor = BLACK;
             // Set Main pieces to last row
-            if (i>=56)
+            if (i >= 56)
             {
-                switch (i%8)
+                switch (i % 8)
                 {
                 case 0:
                 case 7:
@@ -190,8 +190,9 @@ int main()
         }
 
         cout << "  ";
-        if (i%8==0){
-            cout<<"\n";
+        if (i % 8 == 0)
+        {
+            cout << "\n";
         }
     }
 
