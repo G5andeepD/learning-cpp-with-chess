@@ -2,6 +2,7 @@
 
 using namespace std;
 
+#define BOARD_SIZE 64
 // Colors for Squares and Pieces
 enum Color
 {
@@ -38,162 +39,160 @@ struct Square
 int main()
 {
 
-    Square chessboard[8][8];
+    Square chessboard[BOARD_SIZE];
 
     // Setting Up Squares and Pieces
 
-    for (int row = 0; row < 8; row++)
+    for (int i = 0; i < BOARD_SIZE; i++)
     {
-        for (int col = 0; col < 8; col++)
+
+        chessboard[i].squareColor = (i) % 2 == 1 ? WHITE : BLACK;
+        if (i < 16)
         {
-            chessboard[row][col].squareColor = (row + col) % 2 == 1 ? WHITE : BLACK;
-            if (row < 2)
+            chessboard[i].piece.pieceColor = WHITE;
+            // Set white pieces in the first two rows
+            if (i < 8)
             {
-                chessboard[row][col].piece.pieceColor = WHITE;
-                // Set white pieces in the first two rows
-                if (row == 0)
+                switch (i % 8)
                 {
-                    switch (col)
-                    {
-                    case 0:
-                    case 7:
-                        chessboard[row][col].piece.pieceName = ROOK;
-                        break;
-                    case 1:
-                    case 6:
-                        chessboard[row][col].piece.pieceName = KNIGHT;
-                        break;
-                    case 2:
-                    case 5:
-                        chessboard[row][col].piece.pieceName = BISHOP;
-                        break;
-                    case 3:
-                        chessboard[row][col].piece.pieceName = QUEEN;
-                        break;
-                    case 4:
-                        chessboard[row][col].piece.pieceName = KING;
-                        break;
-                    default:
-                        chessboard[row][col].piece.pieceName = NONE;
-                        break;
-                    }
-                }
-                else
-                {
-                    chessboard[row][col].piece.pieceName = PAWN;
-                }
-            }
-            // Set black pieces in the last two rows
-            else if (row >= 6)
-            {
-                chessboard[row][col].piece.pieceColor = BLACK;
-                // Set Main pieces to last row
-                if (row == 7)
-                {
-                    switch (col)
-                    {
-                    case 0:
-                    case 7:
-                        chessboard[row][col].piece.pieceName = ROOK;
-                        break;
-                    case 1:
-                    case 6:
-                        chessboard[row][col].piece.pieceName = KNIGHT;
-                        break;
-                    case 2:
-                    case 5:
-                        chessboard[row][col].piece.pieceName = BISHOP;
-                        break;
-                    case 3:
-                        chessboard[row][col].piece.pieceName = QUEEN;
-                        break;
-                    case 4:
-                        chessboard[row][col].piece.pieceName = KING;
-                        break;
-                    default:
-                        chessboard[row][col].piece.pieceName = NONE;
-                        break;
-                    }
-                }
-                else
-                {
-                    chessboard[row][col].piece.pieceName = PAWN;
+                case 0:
+                case 7:
+                    chessboard[i].piece.pieceName = ROOK;
+                    break;
+                case 1:
+                case 6:
+                    chessboard[i].piece.pieceName = KNIGHT;
+                    break;
+                case 2:
+                case 5:
+                    chessboard[i].piece.pieceName = BISHOP;
+                    break;
+                case 4:
+                    chessboard[i].piece.pieceName = QUEEN;
+                    break;
+                case 3:
+                    chessboard[i].piece.pieceName = KING;
+                    break;
+                default:
+                    chessboard[i].piece.pieceName = NONE;
+                    break;
                 }
             }
             else
             {
-
-                chessboard[row][col].piece.pieceName = NONE;
+                chessboard[i].piece.pieceName = PAWN;
             }
+        }
+        // Set black pieces in the last two rows
+        else if (i >= 48)
+        {
+            chessboard[i].piece.pieceColor = BLACK;
+            // Set Main pieces to last row
+            if (i>=56)
+            {
+                switch (i%8)
+                {
+                case 0:
+                case 7:
+                    chessboard[i].piece.pieceName = ROOK;
+                    break;
+                case 1:
+                case 6:
+                    chessboard[i].piece.pieceName = KNIGHT;
+                    break;
+                case 2:
+                case 5:
+                    chessboard[i].piece.pieceName = BISHOP;
+                    break;
+                case 4:
+                    chessboard[i].piece.pieceName = QUEEN;
+                    break;
+                case 3:
+                    chessboard[i].piece.pieceName = KING;
+                    break;
+                default:
+                    chessboard[i].piece.pieceName = NONE;
+                    break;
+                }
+            }
+            else
+            {
+                chessboard[i].piece.pieceName = PAWN;
+            }
+        }
+        else
+        {
+
+            chessboard[i].piece.pieceName = NONE;
         }
     }
 
     // print the chess board
-    for (int row = 7; row > -1; row--)
+
+    for (int i = 63; i > -1; i--)
     {
-        for (int col = 0; col < 8; col++)
+
+        if (chessboard[i].piece.pieceColor == WHITE)
         {
-            
-            if (chessboard[row][col].piece.pieceColor == WHITE)
+            switch (chessboard[i].piece.pieceName)
             {
-                switch (chessboard[row][col].piece.pieceName)
-                {
-                case KING:
-                    cout << "K";
-                    break;
-                case QUEEN:
-                    cout << "Q";
-                    break;
-                case ROOK:
-                    cout << "R";
-                    break;
-                case KNIGHT:
-                    cout << "N";
-                    break;
-                case BISHOP:
-                    cout << "B";
-                    break;
-                case PAWN:
-                    cout << "P";
-                    break;
-                case NONE:
-                    cout << "X";
-                    break;
-                }
+            case KING:
+                cout << "K";
+                break;
+            case QUEEN:
+                cout << "Q";
+                break;
+            case ROOK:
+                cout << "R";
+                break;
+            case KNIGHT:
+                cout << "N";
+                break;
+            case BISHOP:
+                cout << "B";
+                break;
+            case PAWN:
+                cout << "P";
+                break;
+            case NONE:
+                cout << "X";
+                break;
             }
-            else
-            {
-
-                switch (chessboard[row][col].piece.pieceName)
-                {
-                case KING:
-                    cout << "k";
-                    break;
-                case QUEEN:
-                    cout << "q";
-                    break;
-                case ROOK:
-                    cout << "r";
-                    break;
-                case KNIGHT:
-                    cout << "n";
-                    break;
-                case BISHOP:
-                    cout << "b";
-                    break;
-                case PAWN:
-                    cout << "p";
-                    break;
-
-                case NONE:
-                    cout << "X";
-                    break;
-                }
-            }
-
-            cout << "  ";
         }
-        cout << endl;
+        else
+        {
+
+            switch (chessboard[i].piece.pieceName)
+            {
+            case KING:
+                cout << "k";
+                break;
+            case QUEEN:
+                cout << "q";
+                break;
+            case ROOK:
+                cout << "r";
+                break;
+            case KNIGHT:
+                cout << "n";
+                break;
+            case BISHOP:
+                cout << "b";
+                break;
+            case PAWN:
+                cout << "p";
+                break;
+
+            case NONE:
+                cout << "X";
+                break;
+            }
+        }
+
+        cout << "  ";
+        if (i%8==0){
+            cout<<"\n";
+        }
     }
 
     return 0;
