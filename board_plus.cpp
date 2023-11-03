@@ -133,20 +133,19 @@ struct Square
     Piece piece;
 };
 
-Rank getRank(SquareName squareName){
+Rank getRank(SquareName squareName)
+{
     int i = static_cast<int>(squareName);
-    
 
-    return Rank(i%RANK_SIZE);
+    return Rank(i % RANK_SIZE);
 };
 
-File getFile(SquareName squareName){
+File getFile(SquareName squareName)
+{
 
     int i = static_cast<int>(squareName);
-    
 
-    return File(i/RANK_SIZE);
-
+    return File(i / RANK_SIZE);
 }
 
 int main()
