@@ -5,7 +5,7 @@
 
     Note:
     Least Significant Bit corresponds to a1 square
-    Most Significant Bit corresponds to h8 square 
+    Most Significant Bit corresponds to h8 square
 
 */
 #include <iostream>
@@ -15,7 +15,7 @@ typedef uint64_t bitboard;
 // Squares
 constexpr bitboard kAllSquares = ~0ULL;
 
-//a1 square is a dark square
+// a1 square is a dark square
 constexpr bitboard kLightSquares = 0x55AA55AA55AA55AAULL;
 constexpr bitboard kDarkSquares = ~kLightSquares;
 
@@ -66,8 +66,8 @@ constexpr bitboard kBlackQueen = kWhiteQueen << 56;
 constexpr bitboard kBlackKing = kWhiteKing << 56;
 constexpr bitboard kBlackPawns = kWhitePawns << 40;
 
-//This function prints the board by taking 8 bit segments starting from MSB and printing the MSB of the segment first
-//This will print the bits as like you are looking at the board from white side - (a1 square is at bottom left)
+// This function prints the board by taking 8 bit segments starting from MSB and printing the MSB of the segment first
+// This will print the bits as like you are looking at the board from white side - (a1 square is at bottom left)
 void print_board(bitboard num)
 {
     for (int i = 7; i > -1; i--)
@@ -88,6 +88,8 @@ int main()
     bitboard allBlackPieces = kBlackRooks | kBlackKnights | kBlackBishops | kBlackQueen | kBlackKing | kBlackPawns;
 
     bitboard startingBoard = allWhitePieces | allBlackPieces;
+
+    // Some Example Prints
     print_board(startingBoard);
     print_board(kDarkSquares);
     print_board(kLightSquares);
