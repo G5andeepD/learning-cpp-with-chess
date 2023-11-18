@@ -72,8 +72,8 @@ void print_board(bitboard num)
 {
     for (int i = 7; i > -1; i--)
     {
-        int row = ((num >> i * 8) & 0xFF);
-        for (int j = 7; j > -1; j--)
+        int row = ((num >> (i * 8)));
+        for (int j = 0; j < 8; j++)
         {
             cout << ((row >> j) & 1);
         }
@@ -82,17 +82,102 @@ void print_board(bitboard num)
     cout << endl;
 }
 
+// This function takes a fen string as an input and returns the bitboard representation of the board
+bitboard fen_to_bitboard(std::string fen)
+{
+    bitboard board = 0ULL;
+    int square = 56; // Starting square is a8 (top-left corner)
+
+    for (char c : fen)
+    {
+        
+        switch (c)
+
+        {
+        case 'p':
+            board |= (1ULL << square);
+            break;
+        case 'P':
+            board |= (1ULL << square);
+            break;
+        case 'n':
+            board |= (1ULL << square);
+            break;
+        case 'N':
+            board |= (1ULL << square);
+            break;
+        case 'b':
+            board |= (1ULL << square);
+            break;
+        case 'B':
+            board |= (1ULL << square);
+            break;
+        case 'r':
+            board |= (1ULL << square);
+            break;
+        case 'R':
+            board |= (1ULL << square);
+            break;
+        case 'q':
+            board |= (1ULL << square);
+            break;
+        case 'Q':
+            board |= (1ULL << square);
+            break;
+        case 'k':
+            board |= (1ULL << square);
+            break;
+        case 'K':
+            board |= (1ULL << square);
+            break;
+        case '/':
+            square -= 17; // Move to the next rank
+            break;
+        default:
+            square += (c - '0' - 1);
+            break;
+        }
+        square++;
+    }
+
+    return board;
+}
+
 int main()
 {
-    bitboard allWhitePieces = kWhiteRooks | kWhiteKnights | kWhiteBishops | kWhiteQueen | kWhiteKing | kWhitePawns;
-    bitboard allBlackPieces = kBlackRooks | kBlackKnights | kBlackBishops | kBlackQueen | kBlackKing | kBlackPawns;
+     // Test Case 1
+    std::string fen1 = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR ";
+    bitboard board1 = fen_to_bitboard(fen1);
+    std::cout << "Board 1: " << fen1 << std::endl;
+    print_board(board1);
 
-    bitboard startingBoard = allWhitePieces | allBlackPieces;
+    // Test Case 2
+    std::string fen2 = "8/8/8/8/8/8/8/8 ";
+    bitboard board2 = fen_to_bitboard(fen2);
+    std::cout << "Board 2: " << fen2 << std::endl;
+    print_board(board2);
 
-    // Some Example Prints
-    print_board(startingBoard);
-    print_board(kDarkSquares);
-    print_board(kLightSquares);
-    print_board(kKingSide);
+    // Test Case 3
+    std::string fen3 = "rnbqkbnr/1ppppppp/8/p7/8/8/PPPPPPPP/RNBQKBNR ";
+    bitboard board3 = fen_to_bitboard(fen3);
+    std::cout << "Board 3: " << fen3 << std::endl;
+    print_board(board3);
+
+    // Test Case 4
+    std::string fen4 = "4k3/8/8/8/8/8/8/4K3 ";
+    bitboard board4 = fen_to_bitboard(fen4);
+    std::cout << "Board 4: " << fen4 << std::endl;
+    print_board(board4);
+
+    // Test Case 5
+    std::string fen5 = "r3k2r/8/8/8/8/8/8/R3K2R ";
+    bitboard board5 = fen_to_bitboard(fen5);
+    std::cout << "Board 5: " << fen5 << std::endl;
+    print_board(board5);
+
+    return 0;
+
+    
+
     return 0;
 }
